@@ -76,13 +76,14 @@ customers.splice(index,1);
 res.send(customer);
 });
 //Validate Information
-function validateCustomer(customer) {
-const schema = {
-title: Joi.string().min(3).required()
-};
-return Joi.validate(customer, schema);
- 
-}
+
+const validateCustomer = function (user) {
+    const schema = Joi.object({
+      title: Joi.string().min(4).max(50)
+    });
+  
+    return schema.validate(user);
+  }; 
  
 //PORT ENVIRONMENT VARIABLE
 const port = process.env.PORT || 8080;
